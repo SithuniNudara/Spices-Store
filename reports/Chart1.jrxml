@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.0.final using JasperReports Library version 6.21.0-4f56c4f36cd19e17675219a9ac4692d5f0f13b06  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Chart1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9e73f887-a142-4b0d-b4c1-0e66116629a1">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Bookstore"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT product.name AS product_name, SUM(invoice.paid_amount) AS total_sales 
+FROM invoice INNER JOIN invoice_item ON invoice.id = invoice_item.invoice_id 
+INNER JOIN stock ON invoice_item.stock_id = stock.id 
+INNER JOIN product ON product.id = stock.product_id 
+GROUP BY product.name]]>
+	</queryString>
+	<field name="product_name" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="name"/>
+		<property name="com.jaspersoft.studio.field.label" value="product_name"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="product"/>
+	</field>
+	<field name="total_sales" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_sales"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_sales"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="122" y="20" width="310" height="40" backcolor="#FFFFFF" uuid="9f451fb5-2520-403b-b5b4-2345280096c5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product-wise Total Sales]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="32">
+			<staticText>
+				<reportElement mode="Opaque" x="95" y="0" width="185" height="30" forecolor="#FFFAFA" backcolor="#010A01" uuid="1b409d91-9db4-4a24-a2d3-3c2a7808521b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a7b2a417-5804-4e4d-8341-16d7a28b92ef"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product Name]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="281" y="0" width="185" height="30" forecolor="#FFFAFA" backcolor="#010A01" uuid="f87d4e6a-54d2-4a99-8ff6-525271cb801b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1982e6d8-6d3a-429e-8957-64aba3f27670"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Sales]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="43">
+			<textField>
+				<reportElement x="94" y="0" width="185" height="30" uuid="6f777ea9-2e03-4d80-b47a-3cf9b4739f73">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a7b2a417-5804-4e4d-8341-16d7a28b92ef"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{product_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="0" width="185" height="30" uuid="d284cea5-cb75-41fd-9cc9-e7604cdd5286">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1982e6d8-6d3a-429e-8957-64aba3f27670"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_sales}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="1" y="29" width="550" height="1" backcolor="#807A7A" uuid="5f961aea-63bb-4841-8879-90ca72f3457d">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</rectangle>
+		</band>
+	</detail>
+</jasperReport>
